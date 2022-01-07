@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    outline: none;
+}
+.App{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Jost',sans-serif;
+    background: #24243e;
+    background: -webkit-linear-gradient(to bottom,#24243e, #89253e,#302b63, #3a6186);
+    background: linear-gradient(to bottom,#24243e, #89253e,#302b63, #3a6186);
+}
+.main{
+    width: 350px;
+    height: 500px;
+    background: magenta;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+}
+.chk{
+    display: none;
+}
+.SignUp{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+label{
+    color: #fff;
+    font-size: 2.3rem;
+    justify-content: center;
+    display: flex;
+    font-weight: 600;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+input{
+    width: 70%;
+    height: 20px;
+    background: #fff;
+    border: none;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding:15px;
+    border-radius: 5px;
+}
+button{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    background: darkmagenta;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    border:none;
+    cursor: pointer;
+    color: #fff;
+    transition: .4s ease-in-out;
+}
+button:hover{
+    background: #89253e;
+}
+.Login{
+    height: 460px;
+    background: #eee;
+    border-radius: 60px / 10%;
+    transform: translateX(-180px);
+    transition: .8s ease-in-out;
+}
+.Login .label{
+    color: #24243e;
+    transform: scale(.6);
+}
+#chk:checked ~ .Login{
+    transform: translateY(-450px);
+}
+#chk:checked ~ .Login label{
+    transform: scale(1);
+}
+#chk:checked ~ .SignUp label{
+    transition: scale(.6);
+} 

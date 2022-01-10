@@ -1,9 +1,30 @@
-import React,{Component} from "react";
+import React,{Component,createRef} from "react";
 
 export default class Athentification extends Component{
+
+    constructor(props){
+        super(props);
+        this.inputName=createRef();
+        this.inputEmail=createRef();
+        this.inputPassword=createRef();
+        this.inputConfirm=createRef();
+        this.inputEmailL=createRef();
+        this.inputPasswordL=createRef();
+    }
+
     state={
         activelogin:false,
-        activesignup:true
+        activesignup:true,
+        RegiterUser:{
+            username:'',
+            email:'',
+            password:'',
+            confirm:''
+        },
+        LoginUser:{
+            email:'',
+            password:''
+        }
     }
 
     toogleSinUp=()=>{
@@ -22,6 +43,7 @@ export default class Athentification extends Component{
 
     SignUp=(e)=>{
         e.preventDefault();
+        alert(this.inputName.current.value);
     }
 
     Login=(e)=>{
@@ -35,19 +57,19 @@ export default class Athentification extends Component{
                 <form className={this.state.activesignup ? "SignUp active-SignUp" : "SignUp inactive-SignUp"} onSubmit={this.SignUp}>
                     <h3>Sign Up</h3>
                     <div className="user-Box">
-                        <input type="text" name="username" required />
+                        <input type="text" name="username"  ref={this.inputName} required />
                         <label htmlFor="username">User Name :</label>
                     </div>
                     <div className="user-Box">
-                        <input type="text" name="email" required />
+                        <input type="text" name="email"  ref={this.inputEmail} required />
                         <label htmlFor="email">Email :</label>
                     </div>
                     <div className="user-Box">
-                        <input type="password" name="password" required />
+                        <input type="password" name="password"  ref={this.inputPassword} required />
                         <label htmlFor="password">Password :</label>
                     </div>
                     <div className="user-Box">
-                        <input type="password" name="confirm" required />
+                        <input type="password" name="confirm"  ref={this.inputConfirm} required />
                         <label htmlFor="confirm">Confirmer Password :</label>
                     </div>
                     <div className="btns">
@@ -59,11 +81,11 @@ export default class Athentification extends Component{
                 <form className={this.state.activelogin ? "Login active-Login" : "Login inactive-Login"} onSubmit={this.Login}>
                     <h3>Login</h3>
                     <div className="user-Box">
-                        <input type="text" name="lemail" required />
+                        <input type="text" name="lemail"  ref={this.inputEmailL} required />
                         <label htmlFor="lemail">Email :</label>
                     </div>
                     <div className="user-Box">
-                        <input type="password" name="lpassword" required/>
+                        <input type="password" name="lpassword" ref={this.inputPasswordL} required/>
                         <label htmlFor="lpassword">Password :</label>
                     </div>
                     <div className="btns">

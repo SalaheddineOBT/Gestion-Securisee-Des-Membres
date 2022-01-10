@@ -6,6 +6,9 @@
     box-sizing: border-box;
     outline: none;
 }
+body {
+	background: #ffc185;
+}
 .App{
     display: flex;
     justify-content: center;
@@ -13,82 +16,147 @@
     min-height: 100vh;
     width: 100%;
     font-family: 'Jost',sans-serif;
-    background: #24243e;
-    background: -webkit-linear-gradient(to bottom,#24243e, #89253e,#302b63, #3a6186);
-    background: linear-gradient(to bottom,#24243e, #89253e,#302b63, #3a6186);
 }
-.main{
-    width: 350px;
-    height: 500px;
-    background: magenta;
-    overflow: hidden;
+.container{
+    position: absolute;
+    width: auto;
+    height: auto;
     border-radius: 10px;
-    box-shadow: 5px 20px 50px #000;
+	top: calc(50% - 240px);
+	left: calc(50% - 160px);
 }
-.chk{
-    display: none;
+form{
+	position: absolute;
+	text-align: center;
+	background: #fff;
+	width: 310px;
+	height: 470px;
+    overflow: hidden;
+	border-radius: 5px;
+	padding: 30px 20px 0 20px;
+	box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
 }
-.SignUp{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-label{
-    color: #fff;
-    font-size: 2.3rem;
-    justify-content: center;
-    display: flex;
-    font-weight: 600;
-    transition: .5s ease-in-out;
-    cursor: pointer;
-}
-input{
-    width: 70%;
-    height: 20px;
-    background: #fff;
-    border: none;
-    justify-content: center;
-    display: flex;
-    margin: 20px auto;
-    padding:15px;
-    border-radius: 5px;
+h3{
+    font-family: 'Dosis';
+	font-size: 35px;
+	text-transform: uppercase;
+	color: #87613d;
+	margin-bottom: 30px;
 }
 button{
-    width: 60%;
-    height: 40px;
-    margin: 10px auto;
-    justify-content: center;
-    display: block;
-    background: darkmagenta;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-top: 20px;
-    border:none;
-    cursor: pointer;
-    color: #fff;
-    transition: .4s ease-in-out;
+	position: absolute;
+	width: 50%;
+	height: 60px;
+	border: 0;
+    bottom: 0;
+	font-family: 'Dosis';
+	font-size: 24px;
+	text-transform: uppercase;
+	cursor: pointer;
 }
-button:hover{
-    background: #89253e;
+.btnBack,.btnLogin{
+    left: 0;
+}
+.btnSub{
+    right: 0;
+}
+input{
+	border: none;
+	border-bottom: 1px solid #ffc185;
+	width: 93%;
+	font-family: 'Roboto';
+	color: #ff7d00;
+	text-align: left;
+	font-size: 21px;
+	font-weight:300;
+	margin-bottom:25px;
 }
 .Login{
-    height: 460px;
-    background: #eee;
-    border-radius: 60px / 10%;
-    transform: translateX(-180px);
-    transition: .8s ease-in-out;
+    z-index: 1;
+    transform: perspective(100px) translate3d(0px, 0px, -30px);
+    opacity: 0;
 }
-.Login .label{
-    color: #24243e;
-    transform: scale(.6);
+.SignUp{
+    z-index: 2;
 }
-#chk:checked ~ .Login{
-    transform: translateY(-450px);
+.active-SignUp{
+	animation-name: foregrS;
+	animation-duration: 0.9s;
+	animation-fill-mode: forwards;
 }
-#chk:checked ~ .Login label{
-    transform: scale(1);
+.active-Login{
+	animation-name: foregrL;
+	animation-duration: 0.9s;
+	animation-fill-mode: forwards;
 }
-#chk:checked ~ .SignUp label{
-    transition: scale(.6);
-} 
+.inactive-SignUp{
+	animation-name: overS;
+	animation-duration: 0.9s;
+	animation-fill-mode: forwards;
+}
+.inactive-Login{
+	animation-name: overL;
+	animation-duration: 0.9s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes foregrL {
+    0%{
+        z-index:2;
+        transform: perspective(100px) translate3d(0px, 0px, 0px);
+        opacity: 1;
+        box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+    }
+    100%{
+        z-index: 1;    
+        transform: perspective(100px) translate3d(0px, 0px, -30px);
+        opacity: 0;
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+@keyframes foregrS {
+    0%{
+      z-index:2;
+      transform: perspective(100px) translate3d(0px, 0px, 0px);
+      opacity: 1;
+      box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+    }
+    100%{
+      z-index: 1;
+      transform: perspective(100px) translate3d(0px, 0px, -30px);
+      opacity: 0;
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+@keyframes overL {
+    0%{
+        z-index:1;    
+        transform: perspective(100px) translate3d(0px, 0px, -30px);
+        opacity: 0;
+    }
+    50%{
+        z-index:2;
+        transform: perspective(100px) translate3d(400px, 0px, -30px);
+    }
+    100%{
+        z-index:2;
+        transform: perspective(100px) translate3d(0px, 0px, 0px);
+        opacity: 1;
+    }
+}
+@keyframes overS {
+    0%{
+      z-index:1;   
+      transform: perspective(100px) translate3d(0px, 0px, -30px);
+      opacity: 0;
+    }
+    50%{
+      z-index:2;
+      transform: perspective(100px) translate3d(-400px, 0px, -30px);
+    }
+    100%{
+      z-index:2;
+      transform: perspective(100px) translate3d(0px, 0px, 0px);
+      opacity: 1;
+    }
+  }

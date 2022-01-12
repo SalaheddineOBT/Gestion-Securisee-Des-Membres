@@ -192,16 +192,17 @@ h1{
     position: absolute;
     top: 0;right: -50rem;
     padding: 1rem;
-    background: red;
+    background: #E95645;
     font-size: 1.2rem;
     color: white;
     text-align: center;
     width: 20rem;
     transition: all .5s linear;
 }
-.eroor{
+.eroorActive{
     right: 0;
 }
+
 @keyframes move { 
     from {
         transform: translate(-200%,20%);

@@ -1,87 +1,169 @@
 *{
-    margin: 0;
+    box-sizing: border-box;
     padding: 0;
+    margin: 0;
     text-decoration: none;
     list-style: none;
-    box-sizing: border-box;
+    text-transform: none;
     outline: none;
+    user-zoom: none;
+    user-select: none;
+    border: none;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 body {
-	background: #ffc185;
+	background: #dde1e7;
     overflow:hidden;
 }
 .App{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     width: 100%;
-    font-family: 'Jost',sans-serif;
+    height: 100%;
 }
 .container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.container form{
+	position: absolute;
+    border-radius: 5px;
+    background: #ECF4FE;
+    padding: 20px 30px;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 3px rgba(94, 104, 121, 0.288);
+}
+h1{
+	color: #126F97;
+	margin-bottom: 2rem;
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.user-Box{
+    width: 100%;
+    height: 43px;
+    position: relative;
+    background: none;
+    margin-top: 1.8rem;
+}
+.user-Box input{
+	width: 100%;
+    height: 100%;
+    background: none;
+    padding-left: 50px;
+    color: #333;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow:inset -3px -3px 7px #ffffff73,inset 2px 2px 3px rgba(94, 104, 121, 0.288);
+}
+.user-Box svg{
     position: absolute;
-    width: auto;
-    height: auto;
-    border-radius: 10px;
-	top: calc(50% - 240px);
-    transform: translate(-50%, -50%);
-	left: calc(50% - 160px);
-}
-form{
-	position: absolute;
-	text-align: center;
-	background: #fff;
-	width: 310px;
-	height: 470px;
-    overflow: hidden;
-	border-radius: 5px;
-	padding: 30px 20px 0 20px;
-	box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
-}
-h3{
-    font-family: 'Dosis';
-	font-size: 35px;
-	text-transform: uppercase;
-	color: #87613d;
-	margin-bottom: 3rem;
-}
-.SignUp h3{
-    margin-bottom: 2rem;
-}
-button{
-	position: absolute;
-	width: 50%;
-	height: 60px;
-	border: 0;
-    bottom: 0;
-	font-family: 'Dosis';
-	font-size: 24px;
-	text-transform: uppercase;
-	cursor: pointer;
-}
-.btnBack,.btnLogin{
     left: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    color: #126F97;
+    padding-left: .7rem;
+    width: 40px;
+    height: 40px;
 }
-.btnSub{
-    right: 0;
+.user-Box label {
+    position: absolute;
+    text-transform: capitalize;
+    top: 50%;
+    left: 50px;
+    font-weight: 700;
+    transition: .3s;
+    pointer-events: none;
+    transform: translateY(-50%);
+    color: #444;
 }
-input{
-	border: none;
-	border-bottom: 1.5px solid #666;
-	width: 93%;
-	font-family: 'Roboto';
-	text-align: left;
-	font-size: 21px;
-	font-weight:300;
-	margin-bottom:25px;
-}
-.Login{
-    z-index: 1;
-    transform: perspective(100px) translate3d(0px, 0px, -30px);
+.user-Box input:valid ~ label{
     opacity: 0;
 }
-.SignUp{
-    z-index: 2;
+.user-Box .hide,.user-Box .show{
+    margin-left: 83%;
+    cursor: pointer;
+    width: 35px;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: inline-block;
+}
+.fogot{
+    height: 30px;
+    overflow: hidden;
+    width: 8rem;
+}
+.fogot,.signup{
+    margin: 20px auto;
+    margin-bottom: 5px;
+}
+.fogot a,.signup a{
+    color:#0984e3;
+    font-size: 15px;
+    text-transform: capitalize;
+    position: relative;
+    transition: .5s linear;
+    font-weight: 600;
+}
+.fogot a::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #0985e3ad;
+    bottom: -5px;
+    border-radius: 1rem;
+    left: 0;
+    transform: translate(-105%,20%);
+}
+.fogot a:hover::before{
+    animation: 1s linear 0s infinite alternate move_eye;
+}
+.fogot a:hover,.signup a:hover{
+    color: #444;
+}
+.signup a::before{
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 10px;
+    background: #0985e3ad;
+    bottom: -10px;
+    border-radius: 100%;
+    left: 0;
+    transform: translate(-200%,20%);
+    opacity: 0;
+    transition: all .5 linear;
+}
+.signup a:hover::before{
+    opacity: 1;
+    animation: .4s linear 0s forwards alternate move;
+}
+.submit-btn input{
+    width: 100%;
+    cursor: pointer;
+    height: 40px;
+    color: #333;
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: 18px;
+    text-align: center;
+    background: #dde1e7;
+    font-weight: 600;
+    margin-bottom: 10px;
+    box-shadow: -3px -3px 7px #dad6d67e, 2px 2px 3px rgba(94, 104, 121, 0.288);
+}
+.submit-btn input:active{
+    box-shadow:inset -3px -3px 7px #ffffff73,inset 2px 2px 3px rgba(94, 104, 121, 0.288);
+}
+.signup{
+    text-transform: capitalize;
+    text-align: center;
+    color: #333;
+    font-weight: 600;
 }
 .active-SignUp{
 	animation-name: foregrS;
@@ -102,6 +184,39 @@ input{
 	animation-name: overL;
 	animation-duration: 0.9s;
 	animation-fill-mode: forwards;
+}
+.container .SignUp .submit-btn{
+    margin-top:2rem;
+}
+.container .errors{
+    position: absolute;
+    top: 0;right: -50rem;
+    padding: 1rem;
+    background: red;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    width: 20rem;
+    transition: all .5s linear;
+}
+.eroor{
+    right: 0;
+}
+@keyframes move { 
+    from {
+        transform: translate(-200%,20%);
+    } 
+    to { 
+        transform: translate(200%,20%);
+    }  
+}
+@keyframes move_eye { 
+    from {
+        transform: translate(-100%,20%);
+    } 
+    to { 
+        transform: translate(120%,20%);
+    }  
 }
 @keyframes foregrL {
     0%{
@@ -163,40 +278,3 @@ input{
       opacity: 1;
     }
 }
-.SignUp .user-Box,
-.Login .user-Box{
-    position: relative;
-}
-.SignUp .user-Box input,
-.Login .user-Box input{
-    width: 100%;
-    font-size: 16px;
-    margin-bottom: 2.5rem;
-    padding:.3rem;
-}
-.SignUp .user-Box label,
-.Login .user-Box label{
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: left;
-    pointer-events: none;
-    transition: .6s;
-    padding: .3rem;
-}
-.SignUp .user-Box input:valid ~ label,
-.SignUp .user-Box input:focus ~ label,
-.Login .user-Box input:valid ~ label,
-.Login .user-Box input:focus ~ label{
-    top: -20px;
-    left: 0;
-    color: darkorange;
-    font-size: 16px;
-}
-.Login .user-Box input:focus,
-.SignUp .user-Box input:focus{
-	border-bottom: 1.5px solid #ffc185;
-}
-
-
-

@@ -37,16 +37,8 @@ export default class Athentification extends Component{
             email:'',
             password:''
         },
-        errorL:{
-            email:'',
-            password:''
-        },
-        errorR:{
-            username:'',
-            email:'',
-            password:'',
-            confirm:''
-        }
+        errorL:'',
+        errorR:''
     }
 
     toogleSinUp=()=>{
@@ -72,9 +64,21 @@ export default class Athentification extends Component{
         this.setState({showPass:false});
     }
 
-    SignUp=(e)=>{
+    SignUp=async (e)=>{
         e.preventDefault();
-        alert(this.inputName.current.value);
+        if(this.inputConfirm.current.value && this.inputPassword.current.value && this.inputName.current.value && this.inputEmail.current.value){
+            if(this.inputConfirm.current.value === this.inputPassword.current.value){
+                await Axios.post("Register.php",{
+                    username:this.inputName.current.value,
+                    email:this.inputEmail.current.value,
+                    password:this.inputConfirm.current.value
+                }).then(res=>{
+                    console.log(res);
+                });
+            }else{
+                this.setState({errorR:"Confirm Password Incorrect !"});
+            }
+        }
     }
 
     Login=(e)=>{
@@ -159,10 +163,18 @@ export default class Athentification extends Component{
                         don't have account ? <a href="#" onClick={this.toogleLogin}>sign up</a>
                     </div>
                 </form>
-
-                <div className="errors">
-                    hello
-                </div>
+                {
+                    this.state.errorR 
+                    ? 
+                    <div className={this.state.errorR || this.state.errorL ? "errors eroorActive" : "errors"}>
+                        {this.state.errorR}
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={this.setState({errorL:'',errorR:''})} class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div> 
+                    : 
+                    null 
+                }
 
             </div>
         )

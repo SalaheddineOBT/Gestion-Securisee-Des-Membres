@@ -190,14 +190,22 @@ h1{
 }
 .container .errors{
     position: absolute;
-    top: 0;right: -50rem;
+    top: 0;right: 0;
     padding: 1rem;
     background: #E95645;
     font-size: 1.2rem;
     color: white;
-    text-align: center;
-    width: 20rem;
+    text-align: left;
+    width: 22rem;
+    z-index: 2;
     transition: all .5s linear;
+}
+.errors svg{
+    position: absolute;
+    top: 50%;right:1rem;
+    width: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 .eroorActive{
     right: 0;

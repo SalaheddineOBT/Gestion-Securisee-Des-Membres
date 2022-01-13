@@ -100,7 +100,7 @@ export default class Athentification extends Component{
                 password:sha256.x2(this.inputPasswordL.current.value)
             }).then(res=>{
                 if(res.data.success){
-                    console.log(res.data.success);
+                    this.props.logined(true,res.data.data.ID,res.data.data.UserName)
                 }else{
                     this.setState({errorR:res.data.Message});
                 }

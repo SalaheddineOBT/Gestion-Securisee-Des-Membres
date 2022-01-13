@@ -13,8 +13,8 @@
 
     if($_SERVER["REQUEST_METHOD"] != "GET"):
         $db->Message(0,"Page Not Found !");
-        header("HTTP/1.1 404 Not Found");
-        http_response_code(500);
+        // header("HTTP/1.1 404 Not Found");
+        // http_response_code(500);
 
     else:
         $stmt=$db->SelectAll();

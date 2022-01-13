@@ -12,7 +12,7 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 body {
-	background: #dde1e7;
+	background: #DDE5F4;
     overflow:hidden;
 }
 .App{
@@ -29,7 +29,7 @@ body {
 .container form{
 	position: absolute;
     border-radius: 5px;
-    background: #ECF4FE;
+    background: #ecf4fefa;
     padding: 20px 30px;
     box-shadow: -3px -3px 7px #ffffff73, 2px 2px 3px rgba(94, 104, 121, 0.288);
 }
@@ -196,11 +196,14 @@ h1{
     font-size: 1.2rem;
     color: white;
     text-align: left;
-    width: 22rem;
+    width: 29rem;
     z-index: 2;
+    opacity: 0;
     transition: all .5s linear;
+    animation: d 4s normal;
 }
-.errors svg{
+.errors svg,.eroorActive svg{
+
     position: absolute;
     top: 50%;right:1rem;
     width: 30px;
@@ -208,7 +211,34 @@ h1{
     cursor: pointer;
 }
 .eroorActive{
-    right: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;right: 0;
+    padding: 1rem;
+    background: #E95645;
+    font-size: 1.2rem;
+    color: white;
+    text-align: left;
+    width: 29rem;
+    z-index: 2;
+    transition: all .3s linear;
+    animation: S 2s infinite;
+}
+@keyframes d {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+@keyframes S {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 @keyframes move { 

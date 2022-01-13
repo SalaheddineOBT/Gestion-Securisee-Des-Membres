@@ -1,5 +1,6 @@
 import React,{Component,createRef} from "react";
 import axios from "axios";
+import sha256 from "sha256";
 
 const Axios=axios.create({
     baseURL:"http://localhost/Back%20end/Operations/"
@@ -64,6 +65,10 @@ export default class Athentification extends Component{
         this.setState({showPass:false});
     }
 
+    h=()=>{
+        this.setState({errorL:'',errorR:''})
+    }
+
     SignUp=async (e)=>{
         e.preventDefault();
         if(this.inputConfirm.current.value && this.inputPassword.current.value && this.inputName.current.value && this.inputEmail.current.value){
@@ -71,9 +76,15 @@ export default class Athentification extends Component{
                 await Axios.post("Register.php",{
                     username:this.inputName.current.value,
                     email:this.inputEmail.current.value,
-                    password:this.inputConfirm.current.value
+                    password:sha256.x2(this.inputConfirm.current.value)
                 }).then(res=>{
-                    console.log(res);
+                    if(res.data.success){
+                        // console.log(res.data.Message);
+                    }else{
+                        this.setState({errorR:res.data.Message});
+                    }
+                }).catch(e=>{
+                    console.log(e);
                 });
             }else{
                 this.setState({errorR:"Confirm Password Incorrect !"});
@@ -81,9 +92,22 @@ export default class Athentification extends Component{
         }
     }
 
-    Login=(e)=>{
+    Login=async (e)=>{
         e.preventDefault();
-        
+        if(this.inputEmailL.current.value && this.inputPasswordL.current.value){
+            await Axios.post("Login.php",{
+                email:this.inputEmailL.current.value,
+                password:sha256.x2(this.inputPasswordL.current.value)
+            }).then(res=>{
+                if(res.data.success){
+                    console.log(res.data.success);
+                }else{
+                    this.setState({errorR:res.data.Message});
+                }
+            }).catch(e=>{
+                console.log(e);
+            });
+        }
     }
 
     render(){
@@ -121,10 +145,10 @@ export default class Athentification extends Component{
                             <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div class="submit-btn">
+                    <div className="submit-btn">
                         <input type="submit" value="Sign up" />
                     </div>
-                    <div class="signup">
+                    <div className="signup">
                         Already have account ? <a href="#" onClick={this.toogleSinUp}>sign in </a>
                     </div>
                 </form>
@@ -153,27 +177,27 @@ export default class Athentification extends Component{
                             <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div class="fogot">
+                    <div className="fogot">
                         <a href="#">Forgot Password ?</a>
                     </div>
-                    <div class="submit-btn">
+                    <div className="submit-btn">
                         <input type="submit" value="Sign in" />
                     </div>
-                    <div class="signup">
+                    <div className="signup">
                         don't have account ? <a href="#" onClick={this.toogleLogin}>sign up</a>
                     </div>
                 </form>
                 {
                     this.state.errorR 
-                    ? 
-                    <div className={this.state.errorR || this.state.errorL ? "errors eroorActive" : "errors"}>
-                        {this.state.errorR}
-                        <svg xmlns="http://www.w3.org/2000/svg" onClick={this.setState({errorL:'',errorR:''})} class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    ?
+                    <div className={this.state.errorR || this.state.errorL ? "eroorActive" : "errors"}>
+                        {this.state.errorR || this.state.errorL}
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={this.h} class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
-                    </div> 
+                    </div>
                     : 
-                    null 
+                    null
                 }
 
             </div>

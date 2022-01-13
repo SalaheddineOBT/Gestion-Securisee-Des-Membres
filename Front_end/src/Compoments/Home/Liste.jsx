@@ -1,10 +1,6 @@
 import React, { Component, createRef } from "react";
 import axios from "axios";
 
-const Axios=axios.create({
-    baseURL:"http://localhost/Back%20end/Operations/"
-});
-
 export default class List extends Component{
 
     constructor(props){
@@ -23,20 +19,29 @@ export default class List extends Component{
     }
 
     Update=async(idd)=>{
-        if(idd && Number.isInteger(idd)){
-            await Axios.put("Update.php",{
-                id:idd,
-                username:this.inputUseName.current.value,
-                email:this.inputemail.current.value,
-            }).then(res=>{
-                if(res.data.success){
-                    
-                }else{
-
-                }
-            }).catch(e=>{
-                console.log(e);
-            })
+        let name=this.inputUseName.current.value;
+        let eml=this.inputemail.current.value
+        if(idd && Number.isInteger(idd) && name && eml){
+          await fetch("http://localhost/Crud%20API%20PHP/Operations/Update.php",{
+              method:"PUT",
+              headers:{'Content-Type': 'application/json'},
+              body:JSON.stringify({id:idd,username:name,email:eml})
+          }).then(res=>{
+              return res.json();
+          }).then(data=>{
+            if(data.success){
+                alert(data.Message);
+                this.props.listing();
+                this.toogleUpdate();
+                this.props.err(data.Message,true);
+            }else{
+                this.props.err(data.Message,false);
+            }
+          }).catch(e=>{
+              console.log(e);
+          })
+        }else{
+            this.props.err("All fields are required !",false);
         }
     }
 
@@ -70,7 +75,7 @@ export default class List extends Component{
                         <input type="text" ref={this.inputemail} name="email" defaultValue={users.Email} required />
                     </td>
                     <td>
-                        <button type="submit" className="btn">Editer</button>
+                        <button type="submit" className="btn" onClick={()=>this.Update(users.ID)}>Save</button>
                         <button type="submit" className="btn" onClick={this.toogleUpdate}>Cancel</button>
                     </td>
                 </tr>

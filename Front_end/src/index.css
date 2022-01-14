@@ -242,18 +242,20 @@ table th{
     position: sticky;
     top: 0;
     font-size: 1.2rem;
-    padding: .5rem;
-    background: #CADCF3;
+    padding: .9rem;
+    background: #b4c9e4;
 }
 td{
     height: 5.5rem;
 }
 tr{
-    border-bottom:1px solid #000;
     text-align: center;
 }
 tr:nth-child(odd){
-    background: #EDF6FF;
+    background: #fff;
+}
+tr:nth-child(even){
+    background: #DDE5F4;
 }
 td:first-child{
     padding-top: .3rem;
@@ -271,14 +273,14 @@ tr input[type="text"],tr input[type="email"]{
     color: #333;
     padding: .5rem;
     background: #fff;
-    padding-left: 50px;
+    padding-left: 45px;
     font-size: 18px;
     border-radius: 30px;
     box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
 }
 .befortbl{
     overflow:auto;
-    height: 65.3vh;
+    height: 57vh;
     width: 95%;
     margin:auto;
     margin-bottom: 1rem;
@@ -293,9 +295,6 @@ tr input[type="text"],tr input[type="email"]{
 .toping h1{
     text-align: left;
     padding-left: 1rem;
-}
-.toping button{
-    
 }
 .suc,
 .ero{
@@ -341,7 +340,6 @@ tr input[type="text"],tr input[type="email"]{
     width: 100%;
     height: 100vh;
     z-index: 2;
-    background-image: radial-gradient(circle, #83bfff, #70c2fe, #5bc5fc, #45c8f8, #2dcaf2, #23cff0, #1dd4ee, #1fd8eb, #30e1ed, #40eaef, #4ff2f0, #5ffbf1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -349,9 +347,9 @@ tr input[type="text"],tr input[type="email"]{
     transition: .5s linear;
 }
 .active form,.Create form{
-    background-image: radial-gradient(circle, #0089b6, #0084b4, #007cb1, #0077ae, #006fab, #006da9, #006ba8, #0068a6, #0068a6, #0068a7, #0068a7, #0068a7);
     padding:2rem;
     width: 25rem;
+    background: #cfe5ff;
     position: relative;
     box-shadow: -3px 12px 41px 6px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
 }
@@ -373,8 +371,8 @@ tr input[type="text"],tr input[type="email"]{
     width: 100%;
     height: 100vh;
     z-index: 1;
-    background-image: radial-gradient(circle, #83bfff, #70c2fe, #5bc5fc, #45c8f8, #2dcaf2, #23cff0, #1dd4ee, #1fd8eb, #30e1ed, #40eaef, #4ff2f0, #5ffbf1);
-    display: flex;
+    background: #ecf4fefa;
+     display: flex;
     align-items: center;
     justify-content: center;
     transition: .5s linear;
@@ -387,12 +385,12 @@ tr input[type="text"],tr input[type="email"]{
     width: 2.5rem;
     cursor: pointer;
     height: 2.5rem;
-    color: #FFF;
+    color: #444;
 }
 .active form h1,.Create form h1{
-    color: #FFF;
+    color: #333;
     text-align: center;
-    padding-bottom:.8rem;
+    padding-bottom:.2rem;
 }
 .information{
     width: 23rem;
@@ -460,23 +458,155 @@ ul li{
     padding: 1rem;
     width: 100%;
     height: 100vh;
-    background-image: radial-gradient(circle, #d2f5ff, #d7f6fe, #dcf7fd, #e0f7fd, #e5f8fc, #e7f9fc, #eaf9fb, #ecfafb, #edfafb, #effbfc, #f0fbfc, #f1fbfc);
 }
+.Create .user-Box svg,.active .user-Box svg{
+    color: #333;
+    transform: translateY(-50%);
+    top: 50%;
+}
+.Create .btn,.active .btn{
+    width: 100%;
+    cursor: pointer;
+    height: 40px;
+    color: #333;
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: 18px;
+    text-align: center;
+    background: #dde1e7;
+    font-weight: 600;
+    margin-top: 2rem;
+    box-shadow: -3px -3px 7px #dad6d67e, 2px 2px 3px rgba(94, 104, 121, 0.288);
+}
+.Create .btn button,.active .btn button{
+    width: 100%;
+    height:100%;
+    color: #333;
+    transition: .3s linear;
+    font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2rem;
+}
+.Create .btn button:hover,.active .btn button:hover{
+    background: #126F97;
+    color: whitesmoke;
+}
+tr td input{
+    position: relative;
+}
+/* tr #icon1{
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%) translateX(1130%);
+    top: 50%;
+    color: #126F97;
+    width: 35px;
+    height: 40px;
+}
+tr #icon2{
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%) translateX(800%);
+    top: 50%;
+    color: #126F97;
+    width: 35px;
+    height: 40px;
+} */
+
+/* .HomePage::before{
+    content: '';
+    width:30rem;
+    z-index: -1;
+    opacity: .6;
+    height:30rem;
+    top: -13rem;left: -10rem;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
+}
+.HomePage::after{
+    content: '';
+    width:30rem;
+    z-index: -1;
+    opacity: .6;
+    height:30rem;
+    bottom: -13rem;right: -10rem;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
+} */
 .HomePage nav{
     position: fixed;
     top: 0;left: 0;
     display: flex;
     width: 100%;
     color: #fff;
-    background: #165975;
+    padding: .5rem;
+    padding-top: 1rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .h{
     color: #FCB694;
 }
 .cont{
     margin-top:5rem;
+}
+.toping .btn{
+    width: 10rem;
+    padding:.7rem;
+    background: #E95645;
+    position: relative;
+    cursor: pointer;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+} 
+.toping .btn button{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: none;
+    text-align: left;
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 600;
+}
+.toping .btn svg{
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translateY(-50%);
+    color: #fff;
+    width: 2rem;height: 2rem;
+}
+nav .img{
+    width: 5rem;
+    background: #e684ae;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border:2px solid #126F97;
+    margin-right: 1.5rem;
+}
+.conten{
+    width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conten h1{
+    transform: translateY(50%);
+    margin-right: 1rem;
+    color: #126F97;
+}
+nav .img img{
+    width: 100%;
+    height: 100%;
+}
+nav h1{
+    color: #126F97;
+    text-align: left;
 }
 
 

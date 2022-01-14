@@ -1,6 +1,7 @@
 import React,{Component,Fragment,createRef} from "react";
 import sha256 from "sha256";
 import Liste from "./Liste";
+import img from "./../../images/bg.png";
 
 export default class Home extends Component{
 
@@ -149,16 +150,39 @@ export default class Home extends Component{
                 <div className={(this.state.active) ? "active" : "Create"}>
                     <form onSubmit={this.OnSubmited} className="form">
                         <h1>Create New User</h1>
+                        <div className="user-Box">
+                            <input type="text" name="username" ref={this.inputName} defaultValue={this.state.user.username} required onChange={this.OnChanging} />
+                            <label htmlFor="username">User Name *</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div className="user-Box">
+                            <input type="email" name="email" ref={this.inputEmail} defaultValue={this.state.user.email} required onChange={this.OnChanging} />
+                            <label htmlFor="email">Email *</label>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                        </div>
+                        <div className="user-Box">
+                            <input type="password" name="password" ref={this.inputPassword} defaultValue={this.state.user.password} required onChange={this.OnChanging} />
+                            <label htmlFor="password">Passowrd *</label>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div className="user-Box">
+                            <input type="password" name="confirm" ref={this.inputConfirm} defaultValue={this.state.user.confirm} required onChange={this.OnChanging} />
+                            <label htmlFor="confirm">Confirme Passowrd *</label>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
                         {/* {this.state.err ? (<span className="error">{this.state.err}</span>) : null} */}
-                        <label htmlFor="username">User Name :</label>
-                        <input type="text" name="username" placeholder="Enter Your User Name :" ref={this.inputName} defaultValue={this.state.user.username} required onChange={this.OnChanging} />
-                        <label htmlFor="email">Email :</label>
-                        <input type="email" name="email" placeholder="Enter Your Email :" ref={this.inputEmail} defaultValue={this.state.user.email} required onChange={this.OnChanging} />
-                        <label htmlFor="password">Passowrd :</label>
-                        <input type="password" name="password" placeholder="Enter Your Password :" ref={this.inputPassword} defaultValue={this.state.user.password} required onChange={this.OnChanging} />
-                        <label htmlFor="confirm">Confirme Passowrd :</label>
-                        <input type="password" name="confirm" placeholder="Confirm Your Password :" ref={this.inputConfirm} defaultValue={this.state.user.confirm} required onChange={this.OnChanging} />
-                        <button type="submit">ADD</button>
+                        <div className="btn">
+                            <button type="submit" >ADD NEW</button>
+                        </div>
                         <svg xmlns="http://www.w3.org/2000/svg" onClick={this.toogle} class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -167,14 +191,25 @@ export default class Home extends Component{
                 
                 <div className="HomePage">
                     <nav>
-                        <span className="tit">Dashboard</span>
-                        <h1>User Connecté : <span className="h">{this.props.v}</span></h1>
-                        <button className="logout" type='submit' onClick={()=>this.props.logout()}>Logout</button>
+                        <h1>Members Information</h1>
+                        {/* <button className="logout" type='submit' onClick={()=>this.props.logout()}>Logout</button> */}
+                        
+                        <div className="conten">
+                            <h1>username</h1>
+                            <div className="img">
+                                <img src={img} alt="Image" />
+                            </div>
+                        </div>
                     </nav>
                     <div className="cont">
                         <div className="toping">
-                            <h1>Members Information</h1>
-                            <button className="btni" type="submit" onClick={this.toogle}>Create New</button>
+                            <div className="btn" onClick={this.toogle}>
+                                <button className="btni" type="submit" >Create New</button>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                                </svg>
+                            </div>
+                            <h1></h1>
                         </div>
                         <form className="befortbl" onSubmit={this.Onsub}>
                             <table>

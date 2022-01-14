@@ -1,116 +1,212 @@
-import React, { Component, Fragment } from "react";
-import List from "./Liste";
-import axios from "axios";
-
-const Axios=axios.create({
-    baseURL:"http://localhost/Back%20end/Operations/"
-});
+import React,{Component,Fragment,createRef} from "react";
+import sha256 from "sha256";
+import Liste from "./Liste";
 
 export default class Home extends Component{
+
     constructor(props){
         super(props);
+        this.inputName=createRef();
+        this.inputEmail=createRef();
+        this.inputPassword=createRef();
+        this.inputConfirm=createRef();
     }
 
     state={
+        err:'',
+        active:false,
         users:[],
-        error:'',
-        succe:''
-    }
+        user:{
+            username:'',
+            email:'',
+            password:'',
+            confirm:''
+        },
+        user1:{},
+        f:false
+    };
 
     componentDidMount(){
         this.listing();
-        document.title="Page d'accueil";
-    }
+        document.title="Home Page";
+    };
 
-    err=(val,type)=>{
-        if(type){
-            this.setState({succe:val});
-        }else{
-            this.setState({error:val});
-        }
-    }
-
-    listing=async()=>{
-        await Axios.get("Listing.php").then(res=>{
-            if(res.data.success){
-                this.setState({users:res.data.data});
-            }
+    listing=async ()=>{
+        await fetch('http://localhost/Crud%20API%20PHP/Operations/Listing.php')
+        .then(res=>{
+            return res.json();
+        }).then(data=>{
+            this.setState({users:data.data});
         }).catch(e=>{
             console.log(e);
         });
+    };
+
+    OnChanging=()=>{
+        const i={
+            username:this.inputName.current.value,
+            email:this.inputEmail.current.value,
+            password:this.inputPassword.current.value,
+            confirm:this.inputConfirm.current.value
+        }
+        this.setState({user:i});
     }
 
-    onSub=(e)=>{
-        e.preventDefault();   
+    Onsub=(e)=>{
+        e.preventDefault();
+    };
+
+    OnSubmited=async(e)=>{
+        e.preventDefault();
+        const {user}=this.state;
+        if(user.password.length < 8){
+            this.setState({err:"Password Must Be at least 8 characters !"});
+        }else if(user.password!==user.confirm){
+            this.setState({err:"Confirm Password Is Incorrect !"});
+        }else{
+            await fetch("http://localhost/Crud%20API%20PHP/Operations/Create.php",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({
+                    username:user.username,
+                    email:user.email,
+                    password:sha256.x2(user.confirm)
+                })
+            }).then(res=>{
+                return res.json();
+            }).then(data=>{
+                if(data.success){
+                    alert(data.Message);
+                    this.listing();
+                    this.setState({err:""});
+                    this.setState({user:{
+                        username:'',
+                        email:'',
+                        password:'',
+                        confirm:''
+                    }});
+                    this.inputName.current.value="";
+                    this.inputEmail.current.value="";
+                    this.inputPassword.current.value="";
+                    this.inputConfirm.current.value="";
+                    this.toogle();
+
+                }else{
+                    this.setState({err:data.Message});
+            }
+
+            }).catch(e=>{
+                console.log(e);
+            });
+        }
     }
 
+    toogle=()=>{
+        const {active}=this.state;
+        this.setState({active:!active});
+        this.inputName.current.value="";
+        this.inputEmail.current.value="";
+        this.inputPassword.current.value="";
+        this.inputConfirm.current.value="";
+    }
 
+    Read=async (id,v)=>{
+        if(id && Number.isInteger(id)){
+            await fetch(`http://localhost/Crud%20API%20PHP/Operations/Read.php?id=${id}`,{
 
-    render() {
+            }).then(res=>{
+                return res.json();
+            }).then(data=>{
+                if(data.success){
+                    this.setState({user1:data.data});
+                    this.setState({f:v});
+                }else{
+                    alert(data.Message);
+                }
+            }).catch(e=>{
+                console.log(e);
+            });
+        }
+    }
+
+    toogleF=()=>{
+        this.setState({f:false});
+    }
+    
+    render(){
         const {id}=this.props;
+
         const lister=this.state.users.map((u,i)=>{
             return(
                 <Fragment key={i}>
-                    <List users={u} id={id} logined={this.props.logined} err={this.err} index={i} listing={this.listing} />
+                    <Liste users={u} id={id} Read={this.Read} logined={this.props.logined} index={i} listing={this.listing} />
                 </Fragment>
             )
         });
 
-        return (
-            <div className="HomePage">
-                <nav>
-                    <span className="tit">
-                        <h1>
-                            user Connecté :
-                            <span className="h">
-                                {this.props.v}
-                            </span>
-                        </h1>
-                        <button type="submit" title="Déconnecté" className="logout" onClick={()=>this.props.logout()}>LogOut</button>
-                    </span>
-                </nav>
-                <div className="cont">
-                    <div className="toping">
-                        <h1>
-                            Members Informations :
-                        </h1>
-                        <button type="submit" title="Ajouter User" className="btni">Create New</button>
-                    </div>
-                    <form className="befortbl" onSubmit={this.onSub}>
-                        <table border="1">
-                            <thead className="stiky">
-                                <tr>
-                                    <th>Photo</th>
-                                    <th>User Name</th>
-                                    <th>Email</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {lister}
-                            </tbody>
-                        </table>
+        return(
+            <>
+                <div className={(this.state.active) ? "active" : "Create"}>
+                    <form onSubmit={this.OnSubmited} className="form">
+                        <h1>Create New User</h1>
+                        {/* {this.state.err ? (<span className="error">{this.state.err}</span>) : null} */}
+                        <label htmlFor="username">User Name :</label>
+                        <input type="text" name="username" placeholder="Enter Your User Name :" ref={this.inputName} defaultValue={this.state.user.username} required onChange={this.OnChanging} />
+                        <label htmlFor="email">Email :</label>
+                        <input type="email" name="email" placeholder="Enter Your Email :" ref={this.inputEmail} defaultValue={this.state.user.email} required onChange={this.OnChanging} />
+                        <label htmlFor="password">Passowrd :</label>
+                        <input type="password" name="password" placeholder="Enter Your Password :" ref={this.inputPassword} defaultValue={this.state.user.password} required onChange={this.OnChanging} />
+                        <label htmlFor="confirm">Confirme Passowrd :</label>
+                        <input type="password" name="confirm" placeholder="Confirm Your Password :" ref={this.inputConfirm} defaultValue={this.state.user.confirm} required onChange={this.OnChanging} />
+                        <button type="submit">ADD</button>
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={this.toogle} class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
                     </form>
                 </div>
-                <div className="ero">
+                
+                <div className="HomePage">
+                    <nav>
+                        <span className="tit">Dashboard</span>
+                        <h1>User Connecté : <span className="h">{this.props.v}</span></h1>
+                        <button className="logout" type='submit' onClick={()=>this.props.logout()}>Logout</button>
+                    </nav>
                     <div className="cont">
-                        {this.state.error}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
+                        <div className="toping">
+                            <h1>Members Information</h1>
+                            <button className="btni" type="submit" onClick={this.toogle}>Create New</button>
+                        </div>
+                        <form className="befortbl" onSubmit={this.Onsub}>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {lister}
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
-                
-                <div className="suc">
-                    <div className="cont">
-                        {this.state.succe}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
+
+                <div className={this.state.f ? "information" : "informaleft"}>
+                    <div className="containn">
+                        <h1>User Information</h1>
+                        <ul>
+                            <li><span className="in">ID : </span>{this.state.user1.ID} </li>
+                            <li><span className="in">User Name : </span> {this.state.user1.UserName}</li>
+                            <li><span className="in">Email : </span>{this.state.user1.Email} </li>
+                            <li><span className="in">Create in : </span> {this.state.user1.CreateDate}</li>
+                        </ul>
+                        <button onClick={this.toogleF}>Close</button>
                     </div>
                 </div>
-                
-            </div>
+            </>
         )
     }
 }

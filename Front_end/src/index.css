@@ -227,19 +227,75 @@ h1{
     transition: all .3s linear;
     animation: S 2s infinite;
 }
-.stiky th{
-    position: sticky;
-    top: 0;
-    background: turquoise;
-}
-.befortbl{
-    height: 20rem;
-    overflow: auto;
-    background: whitesmoke;
-}
 table{
     width: 100%;
-    height: auto;
+    height: 100%;
+    border-collapse: collapse;
+}
+table svg{
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    padding-left: .2rem;
+}
+table th{
+    position: sticky;
+    top: 0;
+    font-size: 1.2rem;
+    padding: .5rem;
+    background: #CADCF3;
+}
+td{
+    height: 5.5rem;
+}
+tr{
+    border-bottom:1px solid #000;
+    text-align: center;
+}
+tr:nth-child(odd){
+    background: #EDF6FF;
+}
+td:first-child{
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+table img{
+    width: 5rem;
+    height: 5rem;
+    border:1px solid #FD6563;
+    border-radius: 50%;
+}
+tr input[type="text"],tr input[type="email"]{
+    width: 90%;
+    background: none;
+    color: #333;
+    padding: .5rem;
+    background: #fff;
+    padding-left: 50px;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
+}
+.befortbl{
+    overflow:auto;
+    height: 65.3vh;
+    width: 95%;
+    margin:auto;
+    margin-bottom: 1rem;
+    box-shadow: 0px 0px 7px 1px rgba(51, 51, 51, 0.726);
+}
+.toping{
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    justify-content: space-between;
+}
+.toping h1{
+    text-align: left;
+    padding-left: 1rem;
+}
+.toping button{
+    
 }
 .suc,
 .ero{
@@ -279,6 +335,151 @@ table{
     height: 2rem;
     cursor: pointer;
 }
+.Create{
+    position: absolute;
+    top: 100%;left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    background-image: radial-gradient(circle, #83bfff, #70c2fe, #5bc5fc, #45c8f8, #2dcaf2, #23cff0, #1dd4ee, #1fd8eb, #30e1ed, #40eaef, #4ff2f0, #5ffbf1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .5s linear;
+}
+.active form,.Create form{
+    background-image: radial-gradient(circle, #0089b6, #0084b4, #007cb1, #0077ae, #006fab, #006da9, #006ba8, #0068a6, #0068a6, #0068a7, #0068a7, #0068a7);
+    padding:2rem;
+    width: 25rem;
+    position: relative;
+    box-shadow: -3px 12px 41px 6px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+.active form input,.Create form input{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #333;
+    padding: .5rem;
+    background: #fff;
+    padding-left: 50px;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
+}
+.active{
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    background-image: radial-gradient(circle, #83bfff, #70c2fe, #5bc5fc, #45c8f8, #2dcaf2, #23cff0, #1dd4ee, #1fd8eb, #30e1ed, #40eaef, #4ff2f0, #5ffbf1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s linear;
+    opacity: 1; 
+}
+.Create form svg,
+.active form svg{
+    position: absolute;
+    top: 2%;right: 2%;
+    width: 2.5rem;
+    cursor: pointer;
+    height: 2.5rem;
+    color: #FFF;
+}
+.active form h1,.Create form h1{
+    color: #FFF;
+    text-align: center;
+    padding-bottom:.8rem;
+}
+.information{
+    width: 23rem;
+    height: 20rem;
+    position:absolute;
+    top:4.5rem;left: 0;
+    color: #FFF;
+    background: #126F97;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .6s linear;
+}
+ul{
+    padding:1rem;
+    width:100%;
+}
+ul li{
+    font-size: 1.4rem;
+    padding: .5rem;
+}
+.in{
+    font-weight: 600;
+    color: #b3f6ff;
+}
+.informaleft button,
+.information button{
+    padding: .5rem;
+    border:1px solid #FFF;
+    color: #FFF;
+    background: none;
+    cursor: pointer;
+    transition: .6s linear;
+    margin-left: 1.5rem;
+    font-size: 1.1rem;
+}
+.information button:hover{
+    background: #fff;
+    color: #076585;
+}
+.containn{
+    width: 23rem;
+    height: 20rem;
+}
+.containn h1{
+    text-align: center;
+    margin-top: 1rem;
+}
+.informaleft{
+    width: 23rem;
+    height: 20rem;
+    position:absolute;
+    top:4.5rem;left: -30rem;
+    color: #b3f6ff;
+    background: #076585;
+    display: flex;
+    transition: .6s linear;
+    align-items: center;
+    justify-content: center;
+}
+.read:hover{
+    background: linear-gradient(to right bottom, #616161, #9bc5c3,#77a1d3, #79cbca, #e684ae); 
+}
+.HomePage{
+    padding: 1rem;
+    width: 100%;
+    height: 100vh;
+    background-image: radial-gradient(circle, #d2f5ff, #d7f6fe, #dcf7fd, #e0f7fd, #e5f8fc, #e7f9fc, #eaf9fb, #ecfafb, #edfafb, #effbfc, #f0fbfc, #f1fbfc);
+}
+.HomePage nav{
+    position: fixed;
+    top: 0;left: 0;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    background: #165975;
+    align-items: center;
+    justify-content: space-between;
+}
+.h{
+    color: #FCB694;
+}
+.cont{
+    margin-top:5rem;
+}
+
+
 @keyframes d {
     from{
         opacity: 1;

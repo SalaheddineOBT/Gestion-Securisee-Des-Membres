@@ -373,7 +373,6 @@ table .icon1{
     top:5.5rem;left: 0;
     color: #fff;
     background: #126F97;
-    border: 2px solid #fff;
     border-radius: 50%;
     padding:.3rem;
 }
@@ -650,7 +649,7 @@ nav .img{
     margin-right: 1.5rem;
 }
 .conten{
-    width: 15rem;
+    width: 25rem;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -80,6 +80,7 @@ export default class Athentification extends Component{
                 }).then(res=>{
                     if(res.data.success){
                         // console.log(res.data.Message);
+                        this.props.logined(true,res.data.data.ID,res.data.data.UserName)
                     }else{
                         this.setState({errorR:res.data.Message});
                     }

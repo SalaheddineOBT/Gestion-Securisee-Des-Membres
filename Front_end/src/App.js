@@ -25,14 +25,24 @@ function App() {
     });
   }
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Athentification logined={logined} />} />
-          <Route path="/home" element={<Home logout={logout} v={Vrai.username} id={Vrai.id} logined={logined} />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      {
+        (!Vrai.islogin || !Vrai.username || !Vrai.id) ?
+
+        (
+          <div className="App">
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Athentification logined={logined} />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        ) : (
+          <Home logout={logout} v={Vrai.username} id={Vrai.id} logined={logined} />
+        )
+
+      }
+    </>
   );
 }
 

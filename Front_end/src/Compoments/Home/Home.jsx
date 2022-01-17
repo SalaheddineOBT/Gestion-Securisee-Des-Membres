@@ -22,6 +22,7 @@ export default class Home extends Component{
         issuc:false,
         active:false,
         files:null,
+        files2:null,
         users:[],
         sett:false,
         user:{
@@ -46,6 +47,17 @@ export default class Home extends Component{
         var r=new FileReader();
         r.onload=(e)=>{
             this.setState({files:e.target.result});
+        }
+
+        r.readAsDataURL(event.target.files[0]);
+        // this.setState({img:this.inputfile.current.currentSrc});
+        
+    }
+
+    fileOnchange2=event=>{
+        var r=new FileReader();
+        r.onload=(e)=>{
+            this.setState({files2:e.target.result});
         }
 
         r.readAsDataURL(event.target.files[0]);
@@ -249,10 +261,11 @@ export default class Home extends Component{
                             </div>
                             <div className="cont5">
                                 <div className="img" >
-                                    <img src={img} alt="Image" />
-                                    <input type="file" name="image" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    <img src={this.state.files2 ? this.state.files2 :img} alt="Image" />
+                                    <input type="file" name="image" onChange={this.fileOnchange2} />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
                                 <div className="user-Box">
@@ -286,10 +299,11 @@ export default class Home extends Component{
                         <div className="img" >
                             <img src={this.state.files ? this.state.files : img} ref={this.inputfile} alt="Image" />
                             <input type="file" name="image" onChange={this.fileOnchange} />
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                        </div>
+                                                    </div>
                         <div className="user-Box">
                             <input type="text" name="username" ref={this.inputName} defaultValue={this.state.user.username} required onChange={this.OnChanging} />
                             <label htmlFor="username">User Name *</label>
@@ -334,7 +348,7 @@ export default class Home extends Component{
                         <h1>Members Information</h1>
                         
                         <div className="conten">
-                            <h2>username</h2>
+                            <h2>{this.props.v}</h2>
                             <div className="img" onClick={this.toogleC}>
                                 <img src={img} alt="Image" />
                             </div>
@@ -342,14 +356,15 @@ export default class Home extends Component{
                         <div className={this.state.cot ? 'cont1act' : "cont1"}>
                             <div className="box" onClick={this.toogleset}>
                                 <a href="#" >Settings</a>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </div>
                             <div className="box" onClick={this.logout}>
                                 <a href="#">Logout</a>
-                                <svg xmlns="http://www.w3.org/2000/svg"class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                 </svg>
                             </div>
                         </div>

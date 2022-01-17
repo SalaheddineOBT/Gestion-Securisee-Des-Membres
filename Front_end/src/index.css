@@ -200,7 +200,6 @@ h1{
     color: white;
     text-align: left;
     width: 29rem;
-    z-index: 2;
     opacity: 0;
     transition: all .5s linear;
     animation: d 4s normal;
@@ -223,7 +222,7 @@ h1{
     color: white;
     text-align: left;
     width: 29rem;
-    z-index: 2;
+    z-index: 3;
     transition: all .3s linear;
     animation: S 2s infinite;
 }
@@ -235,11 +234,13 @@ table{
 table svg{
     width: 2rem;
     height: 2rem;
+    color: #126F97;
     cursor: pointer;
+    z-index: 0;
     padding-left: .2rem;
 }
 table th{
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     font-size: 1.2rem;
     padding: .9rem;
@@ -264,23 +265,28 @@ td:first-child{
 table img{
     width: 5rem;
     height: 5rem;
-    border:1px solid #FD6563;
+    border:2px solid #126F97;
     border-radius: 50%;
 }
 tr input[type="text"],tr input[type="email"]{
-    width: 90%;
+    width:17rem;
     background: none;
     color: #333;
     padding: .5rem;
     background: #fff;
-    padding-left: 45px;
     font-size: 18px;
+    text-align: center;
+    position: relative;
     border-radius: 30px;
     box-shadow:inset -3px -3px 7px rgba(51, 51, 51, 0.459),inset 2px 2px 3px rgba(94, 104, 121, 0.486);
 }
+table .icon1{
+    position:absolute;
+
+}
 .befortbl{
     overflow:auto;
-    height: 57vh;
+    height: 67vh;
     width: 95%;
     margin:auto;
     margin-bottom: 1rem;
@@ -336,15 +342,40 @@ tr input[type="text"],tr input[type="email"]{
 }
 .Create{
     position: absolute;
-    top: 100%;left: 0;
+    top: 0;left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 2;
-    display: flex;
+    z-index: -5;
+    display: none;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: .5s linear;
+}
+.active .img,
+.Create .img{
+    width: 8rem;
+    position: relative;
+    height:8rem;
+    border-radius: 50%;
+    margin: auto;
+    border: 2px solid #126F97;
+}
+.active .form .img img,
+.Create .form .img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.active .form .img svg,
+.Create .form .img svg{
+    position: absolute;
+    top:5.5rem;left: 0;
+    color: #fff;
+    background: #126F97;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding:.3rem;
 }
 .active form,.Create form{
     padding:2rem;
@@ -352,6 +383,33 @@ tr input[type="text"],tr input[type="email"]{
     background: #cfe5ff;
     position: relative;
     box-shadow: -3px 12px 41px 6px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+.userinfor .conttt .cont5 input[type='file'],
+.UserInfoDes .conttt .cont5 input[type='file']{
+    position:absolute;
+    top:0;left:1%;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    background: none;
+    color: #333;
+    padding: .5rem;
+    background: #fff;
+    padding-left: 50px;
+    z-index: 1;
+    font-size: 18px;
+    border-radius: 50%;
+}
+.active input[type="file"],
+.Create input[type="file"]{
+    position:absolute;
+    top:0;left:0;
+    opacity: 0;
+    z-index: 1;
+    border-radius: 50%;
+    cursor: pointer;
 }
 .active form input,.Create form input{
     width: 100%;
@@ -370,9 +428,9 @@ tr input[type="text"],tr input[type="email"]{
     top: 0;left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 1;
+    z-index: 3;
     background: #ecf4fefa;
-     display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     transition: .5s linear;
@@ -541,16 +599,17 @@ tr #icon2{
     display: flex;
     width: 100%;
     color: #fff;
+    background: #0985e362;
     padding: .5rem;
     padding-top: 1rem;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .h{
     color: #FCB694;
 }
 .cont{
-    margin-top:5rem;
+    margin-top:8rem;
 }
 .toping .btn{
     width: 10rem;
@@ -559,7 +618,8 @@ tr #icon2{
     position: relative;
     cursor: pointer;
     margin-left: 1.5rem;
-    margin-bottom: 1rem;
+    margin-top: -1.5rem;
+    margin-bottom: .5rem;
 } 
 .toping .btn button{
     width: 100%;
@@ -595,10 +655,10 @@ nav .img{
     align-items: center;
     justify-content: center;
 }
-.conten h1{
-    transform: translateY(50%);
+.conten h2{
     margin-right: 1rem;
     color: #126F97;
+    margin-bottom: .7rem;
 }
 nav .img img{
     width: 100%;
@@ -607,8 +667,249 @@ nav .img img{
 nav h1{
     color: #126F97;
     text-align: left;
+    margin-top: 1.5rem;
+    padding-left: 3rem;
 }
 
+.errorsd,.successd{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s ease-in;
+    transform: scale(0);
+}
+.activeSuc,.activeErr{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    top: 0;left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s ease-in;
+    transform: scale(1);
+}
+.activeSuc .cont,
+.successd .cont{
+    background: #569B70;
+    width: 20rem;
+    border-radius: 1rem;
+    color: #fff;
+    height: 12rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.activeErr .cont,
+.errorsd .cont{
+    background: crimson;
+    border-radius: 1rem;
+    width: 20rem;
+    color: #ffffff;
+    height: 12rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.activeErr .cont svg,
+.activeSuc .cont svg,
+.successd .cont svg,
+.errorsd .cont svg{
+    top: 4%;right: -.5rem;
+    cursor: pointer;
+    position: absolute;
+    width: 5rem;height: 2.5rem;
+}
+.activeErr .cont .titl,
+.activeSuc .cont .titl,
+.successd .cont .titl,
+.errorsd .cont .titl{
+    font-style:normal;
+    font-weight: 700;
+    width: 85%;
+    height: 50%;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.cont1{
+    position: sticky;
+    top: 6.7rem;right: 2.1rem;
+    padding:1rem;
+    width: 10rem;
+    z-index: 100;
+    opacity: 0; 
+    display: none;
+    transition: .3s linear;
+    background: #3963968e;
+    /* box-shadow: .1px .1px rgba(0, 0, 0, 0.397); */
+}
+.cont1act a,
+.cont1 a{
+    padding:.5rem;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.cont1 .box:first-child,
+.cont1act .box:first-child{
+    margin-bottom: .5rem;
+}
+.cont1 .box:hover,
+.cont1act .box:hover{
+    background: #DDE5F4;
+    color: #126F97;
+}
+.cont1 .box:hover a,
+.cont1act .box:hover a{
+    color: #126F97;
+}
+.cont1 .box,
+.cont1act .box{
+    position: relative;
+    transition: .5s linear;
+    width: 100%;
+    cursor: pointer;
+    padding: .5rem;
+}
+.cont1 .box svg,
+.cont1act .box svg{
+    position: absolute;
+    top: .3rem;right: 0;
+    width: 2rem;height: 2rem;
+}
+.cont1act{
+    position: fixed;
+    top: 6.7rem;right: 2.1rem;
+    padding:1rem;
+    width: 10rem;
+    opacity: 1;
+    z-index: 100;
+    display: grid;
+    transition: .3s linear;
+    background: #396396;
+    box-shadow: .1px .1px rgba(0, 0, 0, 0.397);
+}
+.cont1act::before,
+.cont1::before{
+    content: '';
+    width: 1.5rem;
+    height: .7em;
+    position: absolute;
+    top: -.65rem;right: 2rem;
+    background:#3963968e;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.userinfor{
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 3;
+    background: #ecf4fefa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s linear;
+    opacity: 1;
+}
+.UserInfoDes{
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s linear;
+    opacity: 0;
+}
+.UserInfoDes form,.userinfor form{
+    padding:2rem;
+    position: relative;
+    width: 35rem;
+    position: relative;
+    box-shadow: -3px 12px 41px 6px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+.userinfor svg,
+.UserInfoDes svg{
+    position: absolute;
+    top: .5rem;right:.5rem;
+    width: 2.5rem;height: 2.5rem;
+    cursor: pointer;
+    color: #333;
+}
+.userinfor .conttt,.UserInfoDes .conttt{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.cont5 svg,.inputs svg{
+    margin-top: .9rem;
+    cursor: auto;
+}
+.userinfor .conttt .img,.UserInfoDes .conttt .img{
+    width: 10rem;height: 10rem;
+    border-radius: 50%;
+    background: chocolate;
+    border: 2px solid #126F97;
+    margin-left: 30%;
+}
+.inputs{
+    height: 19rem;
+    padding-right: .5rem;
+}
+.inputs .user-Box{
+    margin-bottom: 2.16rem;
+}
+.userinfor form .btn,.UserInfoDes form .btn{
+    width:100%;
+    margin-top: 2rem;
+    text-align: center;
+}
+.cont5 .img{
+    position: relative;
+}
+.cont5 .img svg{
+    position: absolute;
+    left: 1rem;top: 7rem;
+    border-radius: 50%;
+    border: 2px solid #126F97;
+    background: #126F97;
+    color: #fff;
+    cursor: pointer;
+    padding:.3rem;
+}
+.userinfor form .btn button,.UserInfoDes form .btn button{
+    background: #126F97;
+    color: white;
+    padding: .6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: .4s linear;
+    border-radius: 2rem;
+    border: 2px solid #126F97;
+}
+.userinfor form .btn button:hover,.UserInfoDes form .btn button:hover{
+    border: 2px solid #126F97;
+    color: #126F97;
+    background: #fff;
+}
+
+.userinfor .conttt .img img,.UserInfoDes .conttt .img img{
+    width: 100%;height: 100%;
+    border-radius: 50%;
+}
 
 @keyframes d {
     from{
